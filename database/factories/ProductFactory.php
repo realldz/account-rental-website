@@ -15,9 +15,9 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word,
-            'description' => $this->faker->sentence,
-            'price' => $this->faker->randomFloat(2, 1, 100),
+            'info' => $this->faker->sentence,
             'category_id' => \App\Models\Category::factory(),
+            'status' => $this->faker->randomElement([0, 1]),
         ];
     }
 }

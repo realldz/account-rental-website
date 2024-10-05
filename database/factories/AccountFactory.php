@@ -13,10 +13,12 @@ class AccountFactory extends Factory
      */
     public function definition()
     {
+        $username = $this->faker->unique()->userName;
+        $password = $this->faker->unique()->password;
         return [
-            'username' => $this->faker->unique()->userName,
-            'password' => $this->faker->password,
+            'info' => "$username | $password",
             'product_id' => \App\Models\Product::factory(),
+            'status' => $this->faker->randomElement([0, 1]),
         ];
     }
 }

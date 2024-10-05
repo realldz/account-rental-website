@@ -17,6 +17,8 @@ class OrderFactory extends Factory
             'user_id' => \App\Models\User::factory(),
             'product_id' => \App\Models\Product::factory(),
             'quantity' => $this->faker->numberBetween(1, 10),
+            'total_price' => $this->faker->numberBetween(1000, 1000000),
+            'status' => $this->faker->randomElement([-1, 0, 1]),
         ];
     }
 }
