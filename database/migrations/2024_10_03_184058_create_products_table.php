@@ -16,7 +16,6 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('category');
             $table->string('info');
             $table->integer('day_price');
             $table->integer('week_price');
@@ -24,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->integer('status');
             $table->timestamps();
         });
+
     }
 
     /**
