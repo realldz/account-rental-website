@@ -17,6 +17,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('info');
+            $table->integer('status');
             $table->timestamps();
         });
     }

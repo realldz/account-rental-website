@@ -18,6 +18,7 @@ class CreateOrderItemsTable extends Migration
             $table->string('account');
             $table->date('start_date');
             $table->date('end_date');
+            $table->integer('amount');
             $table->timestamps();
         });
     }
