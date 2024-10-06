@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductCircleFactory extends Factory
+class ProductCycleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,9 +15,9 @@ class ProductCircleFactory extends Factory
     {
         return [
             'product_id' => \App\Models\Product::factory(),
-            'circle_price' => $this->faker->numberBetween(1000, 999999),
-            'circle_unit' => $this->faker->numberBetween(1, 4),
-            'circle_value' => $this->faker->numberBetween(1, 3),
+            'cycle_price' => $this->faker->numberBetween(1000, 999999),
+            'cycle_unit' => $this->faker->numberBetween(1, 4),
+            'cycle_value' => $this->faker->numberBetween(1, 3),
         ];
     }
 }
