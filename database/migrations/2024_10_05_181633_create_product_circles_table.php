@@ -18,7 +18,7 @@ class CreateProductCirclesTable extends Migration
             $table->unsignedBigInteger('product_id'); // Khóa ngoại tham chiếu tới sản phẩm
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('cycle_price'); // Giá cho chu kỳ
-            $table->string('cycle_unit'); // Đơn vị chu kỳ (ngày, tuần, tháng)
+            $table->string('cycle_unit')->comment('date: 1, week: 2, month: 3, year: 4'); // Đơn vị chu kỳ (ngày, tuần, tháng)
             $table->integer('cycle_value'); // Giá trị chu kỳ (1, 2, 3,...)
             $table->timestamps();
         });
