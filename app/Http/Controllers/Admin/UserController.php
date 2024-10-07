@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserEditRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Response;
 
 class UserController extends Controller
 {
@@ -48,34 +52,43 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse 
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request): RedirectResponse 
     {
-        //
+        $user = $request->validated();
+        if (User::create($user)) {
+            return redirect()->back()->with('successMsg', 'User created successfully');
+        }
+        return redirect()->back()->withErrors('User creation failed');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.pages.user.info', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UserEditRequest  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse 
      */
-    public function update(Request $request, User $user)
+    public function update(UserEditRequest $request, User $user): RedirectResponse
     {
-        //
+        // dd($request->validated());
+        if ($user->update($request->validated())) {
+            return redirect()->back()->with('successMsg', 'User updated successfully');
+        }
+        return redirect()->back()->withErrors('User update failed');
     }
 
     /**
