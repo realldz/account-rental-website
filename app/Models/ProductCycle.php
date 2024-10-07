@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ProductCycle extends Model
 {
     use HasFactory;
-    protected $guard = [];
+    protected $guarded = [];
 }
