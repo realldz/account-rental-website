@@ -34,7 +34,7 @@ class BuildAdminMenu
             ],
             [
                 'text' => 'Quản lí người dùng',
-                'route'  => 'admin.users',
+                'route'  => 'admin.user.index',
                 'icon' => 'fas fa-fw fa-user',
             ],
             [
