@@ -30,7 +30,6 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a href="{{ route('admin.user.index') }}" class="btn btn-danger">Reset</a>
             </div>
-
         </form>
         <table class="table table-hover table-bordered">
             <thead>
@@ -101,6 +100,9 @@
                                 swal.fire({title: ret.message, icon: 'error'}).then(() => window.location.reload());
                             }
                         },
+                        error: function(ret) {
+                            swal.fire({title: ret, icon: 'error'}).then(() => window.location.reload());
+                        }
                     });
                 }
             });
