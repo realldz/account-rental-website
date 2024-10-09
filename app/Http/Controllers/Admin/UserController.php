@@ -6,13 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserEditRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
+use App\Traits\CrudTrait;
 use Illuminate\Http\Request;
-use Response;
 
 class UserController extends Controller
 {
+    use CrudTrait;
     /**
      * Display a listing of the resource.
      *
@@ -49,21 +48,6 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse 
-     */
-    public function store(UserStoreRequest $request): RedirectResponse 
-    {
-        $user = $request->validated();
-        if (User::create($user)) {
-            return redirect()->back()->with('successMsg', 'User created successfully');
-        }
-        return redirect()->back()->withErrors('User creation failed');
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
@@ -75,35 +59,19 @@ class UserController extends Controller
         return view('admin.pages.user.info', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  UserEditRequest  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\RedirectResponse 
-     */
-    public function update(UserEditRequest $request, User $user): RedirectResponse
+    public function store(UserStoreRequest $request)
     {
-        // dd($request->validated());
-        if ($user->update($request->validated())) {
-            return redirect()->back()->with('successMsg', 'User updated successfully');
-        }
-        return redirect()->back()->withErrors('User update failed');
+        return $this->storeT($request, User::class);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(User $user): JsonResponse
+    public function update(UserEditRequest $request, User $user)
     {
-        try {
-            $user->delete();
-        } catch (\Exception $e) {
-            return $this->fail('Không thể xoá: ' . $e->getMessage());
-        }
-        return $this->success('Đã xoá thành công');
+        return $this->updateT($request, $user);
+    }
+
+    public function destroy(User $user)
+
+    {
+        return $this->destroyT($user);
     }
 }
