@@ -431,7 +431,7 @@ return [
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'vendor/bootstrap-switch/css/bootstrap-switch.min.css',
+                    'location' => 'vendor/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css',
                 ],
             ],
         ],
@@ -441,12 +441,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/bootstrap4-duallistbox/bootstrap4-duallistbox.min.js',
+                    'location' => 'vendor/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'vendor/bootstrap4-duallistbox/bootstrap4-duallistbox.min.css',
+                    'location' => 'vendor/bootstrap4-duallistbox/bootstrap-duallistbox.min.css',
                 ],
             ],
         ],
@@ -465,6 +465,21 @@ return [
                 ],
             ],
         ],
+        'Summernote' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/summernote/summernote-bs4.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/summernote/summernote-bs4.css',
+                ],
+            ],
+        ]
     ],
 
     /*
