@@ -52,7 +52,7 @@ class BuildAdminMenu
             ],
             [
                 'text' => 'Quản lí sản phẩm',
-                'url'  => 'admin/profile',
+                'route'  => 'admin.product.index',
                 'icon' => 'fas fa-fw fa-user',
             ],
             [
