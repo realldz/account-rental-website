@@ -47,7 +47,7 @@ class BuildAdminMenu
             ],
             [
                 'text' => 'Quản lí danh mục',
-                'url'  => 'admin/profile',
+                'route'  => 'admin.category.index',
                 'icon' => 'fas fa-fw fa-user',
             ],
             [
