@@ -57,7 +57,7 @@ class BuildAdminMenu
             ],
             [
                 'text' => 'Quản lí tài khoản',
-                'url'  => 'admin/profile',
+                'route'  => 'admin.account.index',
                 'icon' => 'fas fa-fw fa-user',
             ],
         );

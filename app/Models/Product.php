@@ -20,4 +20,8 @@ class Product extends Model
     public function productCycle(): HasMany {
         return $this->hasMany(ProductCycle::class);
     }
+
+    public function account(): HasMany {
+        return $this->hasMany(Account::class);
+    }
 }
