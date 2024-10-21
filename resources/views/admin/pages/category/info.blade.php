@@ -59,14 +59,16 @@
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>
-                            
+
     </x-adminlte-card>
 @endsection
 @push('js')
-<script>
-    $(document).ready(function() {
-        $('#inputName').val(@json(old('name') ?? $category->name));
-        $("input[name='status'][value='{{ $category->status }}']").click();
-    });
-</script>
+    <script>
+        @isset($category)
+            $(document).ready(function() {
+                $('#inputName').val(@json(old('name') ?? $category->name));
+                $("input[name='status'][value='{{ $category->status }}']").click();
+            });
+        @endisset
+    </script>
 @endpush
