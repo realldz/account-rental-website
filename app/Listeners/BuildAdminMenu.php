@@ -39,7 +39,7 @@ class BuildAdminMenu
             ],
             [
                 'text' => 'Quản lí đơn hàng',
-                'url'  => 'admin/profile',
+                'route'  => 'admin.order.index',
                 'icon' => 'fas fa-fw fa-user',
             ],
             [
@@ -61,15 +61,5 @@ class BuildAdminMenu
                 'icon' => 'fas fa-fw fa-user',
             ],
         );
-
-        // Ví dụ thêm các mục menu từ cơ sở dữ liệu
-        // $categories = \App\Models\Category::all();
-        // foreach ($categories as $category) {
-        //     $event->menu->add([
-        //         'text' => $category->name,
-        //         'url'  => 'admin/categories/' . $category->id,
-        //         'icon' => 'fas fa-fw fa-tag',
-        //     ]);
-        // }
     }
 }

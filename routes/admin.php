@@ -9,4 +9,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('product', ProductController::class)->except(['show']);
     Route::resource('category', CategoryController::class)->except(['show'] );
     Route::resource('account', AccountController::class)->except(['show']);
+    Route::resource('order', OrderController::class)->only(['index', 'show', 'update']);
 });
