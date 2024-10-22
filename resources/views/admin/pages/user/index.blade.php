@@ -3,12 +3,10 @@
 
 @section('content_body')
     <x-adminlte-card title="Quản lí người dùng">
-        <x-slot name="toolsSlot">
-            <a class="btn btn-outline-dark btn-add" href="{{ route('admin.user.create') }}">
-                <i class="fas fa-user" aria-hidden="true"></i>
-                Thêm người dùng
-            </a>
-        </x-slot>
+        @include('admin.components.x-slot.addedToolsSlot', [
+            'model' => 'user',
+            'modelName' => 'người dùng',
+        ])
         <form class="form-row pb-1">
             <div class="form-group col-xxl-1 col-lg-3 col-md-3 col-4">
                 <x-adminlte-input name="id" type="number" placeholder="ID" />
@@ -68,12 +66,7 @@
                 @endforeach
             </tbody>
         </table>
-        <x-slot name="footerSlot">
-            Tổng <code>{{ $users->total() }}</code> người dùng
-            <div class="float-right">
-                {{ $users->links() }}
-            </div>
-        </x-slot>
+        @include('admin.components.x-slot.footerSlot', ['model' => $users])
     </x-adminlte-card>
 @stop
 @push('js')

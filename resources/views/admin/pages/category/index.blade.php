@@ -3,12 +3,10 @@
 
 @section('content_body')
     <x-adminlte-card title="Quản lí danh mục">
-        <x-slot name="toolsSlot">
-            <a class="btn btn-outline-dark btn-add" href="{{ route('admin.category.create') }}">
-                <i class="fas fa-user" aria-hidden="true"></i>
-                Thêm danh mục
-            </a>
-        </x-slot>
+        @include('admin.components.x-slot.addedToolsSlot', [
+            'model' => 'category',
+            'modelName' => 'danh mục',
+        ])
             <form class="form-row pb-1">
                 <div class="form-group col-xxl-1 col-lg-3 col-md-3 col-4">
                     <x-adminlte-input name="id" type="number" placeholder="ID" />
@@ -24,10 +22,7 @@
                         <option value="0">Disable</option>
                     </select>
                 </div>
-                <div class="form-group col-xxl-1 col-lg-3 col-md-3 col-4 btn-group">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="{{ route('admin.category.index') }}" class="btn btn-danger">Reset</a>
-                </div>
+                @include('admin.components.form.footer', ['model' => 'category'])
             </form>
             <table class="table table-hover table-bordered">
                 <thead>
@@ -68,6 +63,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @include('admin.components.x-slot.footerSlot', ['model' => $categories])
     </x-adminlte-card>
 @endsection
 @push('js')

@@ -2,13 +2,11 @@
 @section('content_header_title', 'Quản lí sản phẩm')
 
 @section('content_body')
-    <x-adminlte-card title="Quản lí người dùng">
-        <x-slot name="toolsSlot">
-            <a class="btn btn-outline-dark btn-add" href="{{ route('admin.product.create') }}">
-                <i class="fas fa-user" aria-hidden="true"></i>
-                Thêm sản phẩm
-            </a>
-        </x-slot>
+    <x-adminlte-card title="Quản lí sản phẩm">
+        @include('admin.components.x-slot.addedToolsSlot', [
+            'model' => 'product',
+            'modelName' => 'sản phẩm',
+        ])
         <form class="form-row pb-1">
             <div class="form-group col-xxl-1 col-lg-3 col-md-3 col-4">
                 <x-adminlte-input name="id" type="number" placeholder="ID" />
@@ -31,10 +29,7 @@
                     <option value="0">Dừng bán</option>
                 </select>
             </div>
-            <div class="form-group col-xxl-1 col-lg-3 col-md-3 col-4 btn-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <a href="{{ route('admin.product.index') }}" class="btn btn-danger">Reset</a>
-            </div>
+            @include('admin.components.form.footer', ['model' => 'product'])
         </form>
         <table class="table table-hover table-bordered">
             <thead>
@@ -73,6 +68,7 @@
                 @endforeach
             </tbody>
         </table>
+        @include('admin.components.x-slot.footerSlot', ['model' => $products])
     </x-adminlte-card>
 @stop
 
