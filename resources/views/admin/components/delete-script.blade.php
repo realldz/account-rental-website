@@ -22,7 +22,7 @@
                         }
                     },
                     error: function(ret) {
-                        swal.fire({title: ret, icon: 'error'}).then(() => window.location.reload());
+                        swal.fire({title: ret.responseJSON.message, icon: 'error'}).then(() => window.location.reload());
                     }
                 });
             }
