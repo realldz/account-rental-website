@@ -43,6 +43,11 @@ class BuildAdminMenu
                 'icon' => 'fas fa-fw fa-user',
             ],
             [
+                'text' => 'Quản lí bình luận',
+                'route'  => 'admin.comment.index',
+                'icon' => 'fas fa-fw fa-user',
+            ],
+            [
                 'header' => 'Sản phẩm'
             ],
             [
