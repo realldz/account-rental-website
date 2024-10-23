@@ -40,7 +40,7 @@
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
                                         @isset($product) 
-                                    {{ $product->id == $category->id ? 'selected' : '' }}
+                                    {{ $product->category_id == $category->id ? 'selected' : '' }}
                                     @endisset>
                                         {{ $category->name }}</option>
                                 @endforeach
