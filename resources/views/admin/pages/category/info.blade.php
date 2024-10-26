@@ -4,19 +4,7 @@
     @php
         $title = (isset($product) ? 'Chỉnh sửa' : 'Thêm') . ' danh mục';
     @endphp
-    <x-adminlte-card title="{{ $title }}">
-        @if (Session::has('successMsg'))
-            <x-adminlte-alert theme="success" title="Success">
-                {{ Session::get('successMsg') }}
-            </x-adminlte-alert>
-        @endif
-        @if ($errors->any())
-            <x-adminlte-alert theme="danger" title="Error">
-                @foreach ($errors->all() as $error)
-                    {{ $error }} <br />
-                @endforeach
-            </x-adminlte-alert>
-        @endif
+    @include('admin.components.alert', ['errors' => $errors])
         <form method="POST"
             action="@isset($category) {{ route('admin.category.update', $category->id) }}  @else {{ route('admin.category.store') }} @endisset"
             class="form-horizonal">
