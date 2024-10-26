@@ -6,7 +6,7 @@
 @if ($errors->any())
 <x-adminlte-alert theme="danger" title="Error">
     @foreach ($errors->all() as $error)
-        {{ $error }} <br />
+        <li>{{ $error }}</li>
     @endforeach
 </x-adminlte-alert>
 @endif
