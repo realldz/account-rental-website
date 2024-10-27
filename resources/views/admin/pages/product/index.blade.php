@@ -38,6 +38,7 @@
                     <th>Tên</th>
                     <th>Danh mục</th>
                     <th>Thông tin</th>
+                    <th>Hình ảnh</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -49,6 +50,7 @@
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->category->name }}</td>
                         <td>{{ $product->info }}</td>
+                        <td><img src="{{ $product->image_link }}" alt="" width="50" height="50"></td>
                         <td><span class="badge {{ $product->status ? 'bg-success' : 'bg-danger' }}">
                                 {{ $product->status ? 'Đang bán' : 'Dừng bán' }}
                             </span></td>

@@ -28,6 +28,7 @@ class ProductEditRequest extends FormRequest
             'info' =>'required|string',
             'price' => 'required|array',
             'category_id' =>'required|integer|exists:categories,id',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:1024768',
             'status' => 'boolean|required'
         ];
     }

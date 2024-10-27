@@ -8,7 +8,8 @@
         @include('admin.components.alert', ['errors' => $errors])
         <form method="POST"
             action="@isset($product) {{ route('admin.product.update', $product->id) }}  @else {{ route('admin.product.store') }} @endisset"
-            class="form-horizonal">
+            class="form-horizonal"
+            enctype="multipart/form-data">
             @isset($product)
                 @method('PUT')
             @endisset
@@ -54,6 +55,12 @@
                                     </div>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="image" class="col-md-2 col-sm-3 col-form-label">Hình ảnh</label>
+                        <div class="col-xl-6 col-sm-8">
+                            <input type="file" id="image" name="image" accept="image/*">
                         </div>
                     </div>
                     <div class="form-group row">

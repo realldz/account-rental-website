@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Storage;
 
 class Product extends Model
 {
@@ -23,5 +24,9 @@ class Product extends Model
 
     public function account(): HasMany {
         return $this->hasMany(Account::class);
+    }
+
+    public function getImageLinkAttribute() { 
+        return $this->image ? asset($this->image) : 'https://placehold.co/50';
     }
 }

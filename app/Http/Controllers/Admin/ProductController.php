@@ -12,6 +12,7 @@ use App\Traits\JsonResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -103,12 +104,21 @@ class ProductController extends Controller
         }
 
         $product_update = $request->validated();
-
+        if ($request->hasFile('image')) {
+            Storage::delete($product->image);
+            $path = $request->file('image')->store('public/images');
+            $product_update['image'] = str_replace('public/', 'storage/', $path);
+        }
         $cycles = $product_update['price'];
-        $product->productCycle()->delete();
         unset($product_update['price']);
-        $product->update($product_update);
-        $product->productCycle()->createMany($cycles);
+        try {
+            $product->productCycle()->delete();
+            $product->update($product_update);
+            $product->productCycle()->createMany($cycles);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+
         return redirect()->back()->with('successMsg', 'Updated product successfully');
     }
 
