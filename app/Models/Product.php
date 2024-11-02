@@ -29,4 +29,9 @@ class Product extends Model
     public function getImageLinkAttribute() { 
         return $this->image ? asset($this->image) : 'https://placehold.co/50';
     }
+
+    public function orderItem(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }
