@@ -14,4 +14,8 @@ class Category extends Model
     public function product(): HasMany {
         return $this->hasMany(Product::class);
     }
+
+    public function getImageLinkAttribute() {
+        return $this->image ? asset($this->image) : 'https://placehold.co/20';
+    }
 }
