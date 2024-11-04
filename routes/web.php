@@ -1,5 +1,6 @@
 <?php
-
+namespace App\Http\Controllers;
+use Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/product/{slug}', [ProductController::class, 'index'])->name('product');
+Route::get('auth', [AuthController::class, 'index'])->name('auth')->middleware('guest');
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('register', [AuthController::class, 'register'])->name('register');       
+    Route::get('logout', function () {
+        Auth::logout();
+        return redirect()->route('index');
+    })->name('logout');
+    Route::match(['get', 'post'],'reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
 });
