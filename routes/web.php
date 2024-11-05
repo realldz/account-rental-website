@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('/product/{slug}', [ProductController::class, 'index'])->name('product');
+Route::get('/product/{product:slug}', [ProductController::class, 'index'])->name('product');
 Route::get('auth', [AuthController::class, 'index'])->name('auth')->middleware('guest');
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
