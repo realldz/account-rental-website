@@ -5,6 +5,7 @@ namespace App\Traits;
 use Illuminate\Http\JsonResponse;
 trait JsonResponseTrait
 {
+
     public function success($message, $code = 200): JsonResponse
     {
         return response()->json([

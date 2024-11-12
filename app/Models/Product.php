@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +13,7 @@ use Storage;
 
 class Product extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, SluggableScopeHelpers;
     protected $guarded = [];
 
     /**
@@ -48,5 +49,9 @@ class Product extends Model
     public function orderItem(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function comment(): HasMany {
+        return $this->hasMany(Comment::class);
     }
 }

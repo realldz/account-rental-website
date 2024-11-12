@@ -12,8 +12,8 @@ class OrderItem extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function order(): HasOne {
-        return $this->hasOne(Order::class);
+    public function order(): BelongsTo {
+        return $this->belongsTo(Order::class);
     }
 
     public function product(): BelongsTo {
