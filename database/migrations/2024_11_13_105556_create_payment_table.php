@@ -13,7 +13,7 @@ class CreatePaymentTable extends Migration
      */
     public function up()
     {
-        Schema::create('tables', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique()->index();
             $table->string('name');
@@ -33,6 +33,6 @@ class CreatePaymentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tables');
+        Schema::dropIfExists('payments');
     }
 }
