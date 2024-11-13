@@ -412,7 +412,7 @@
                 } else {
                     $('.woocommerce-notices-wrapper').text('')
                 }
-                const price = r.message.total.toLocaleString().replace(".", ",");
+                const price = r.message.total.toLocaleString().replaceAll(".", ",");
                 $('.cart-subtotal').find('bdi').children('.woocommerce-Price-amount').text(price);
                 $('.order-total').find('bdi').children('.woocommerce-Price-amount').text(price);
                 $('#checkout-loading-overlay').hide();
