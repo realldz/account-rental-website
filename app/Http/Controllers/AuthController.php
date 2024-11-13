@@ -22,6 +22,13 @@ class AuthController extends Controller
         $user = Auth::attempt($request->validated(), $request->input('remember'));
 
         if ($user) {
+            if (Auth::user()->status == 0) {
+                Auth::logout();
+                return redirect()->back()->withErrors('Tài khoản đã bị khoá');
+            }
+            if (Auth::user()->is_admin) {
+                return redirect()->route('admin.index');
+            }
             return redirect()->route('index');
         } else {
             return redirect()->back()->withErrors( 'Sai thông tin đăng nhập');
