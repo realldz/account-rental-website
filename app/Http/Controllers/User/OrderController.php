@@ -30,9 +30,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $title = 'Tài khoản';
         $user = $this->user;
         $orders = $user->orders()->simplePaginate(5);
-        return view('user.pages.order', compact('orders', 'user'));
+        return view('user.pages.order', compact('orders', 'user', 'title'));
     }
 
     /**

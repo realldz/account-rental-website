@@ -20,8 +20,9 @@ class EditAccountController extends Controller
      */
     public function index()
     {
+        $title = 'Tài khoản';
         $user = Auth::user();
-        return view('user.pages.editaccount', compact('user'));
+        return view('user.pages.editaccount', compact('user', 'title'));
     }
 
     public function update(EditAccountRequest $request)

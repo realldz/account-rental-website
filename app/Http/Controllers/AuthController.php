@@ -13,7 +13,8 @@ class AuthController extends Controller
 {
     public function index()
     {
-        return view('user.pages.auth');
+        $title = 'Passport';
+        return view('user.pages.auth', compact('title'));
     }
 
     public function login(LoginRequest $request) 
