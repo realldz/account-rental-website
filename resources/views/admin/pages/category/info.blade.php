@@ -5,6 +5,7 @@
         $title = (isset($product) ? 'Chỉnh sửa' : 'Thêm') . ' danh mục';
     @endphp
     @include('admin.components.alert', ['errors' => $errors])
+    <x-adminlte-card title="{{ $title }}">
         <form method="POST"
             action="@isset($category) {{ route('admin.category.update', $category->id) }}  @else {{ route('admin.category.store') }} @endisset"
             class="form-horizonal">
