@@ -70,6 +70,13 @@
         font-weight: 600;
     }
     */
+    .truncate-text {
+        max-width: 150px; /* Điều chỉnh độ rộng theo ý bạn */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
 
 </style>
 @endpush

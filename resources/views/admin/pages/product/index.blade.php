@@ -47,9 +47,9 @@
                 @foreach ($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->category->name }}</td>
-                        <td>{{ $product->info }}</td>
+                        <td class="truncate-text">{{ $product->name }}</td>
+                        <td class="truncate-text">{{ $product->category->name }}</td>
+                        <td class="truncate-text">{{ $product->info }}</td>
                         <td><img src="{{ $product->image_link }}" alt="" width="50" height="50"></td>
                         <td><span class="badge {{ $product->status ? 'bg-success' : 'bg-danger' }}">
                                 {{ $product->status ? 'Đang bán' : 'Dừng bán' }}
