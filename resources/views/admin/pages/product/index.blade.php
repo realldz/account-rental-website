@@ -37,7 +37,9 @@
                     <th>ID</th>
                     <th>Tên</th>
                     <th>Danh mục</th>
-                    <th>Thông tin</th>
+                    <th>Đang thuê</th>
+                    <th>Không có sẵn</th>
+                    <th>Có sẵn</th>
                     <th>Hình ảnh</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -45,11 +47,16 @@
             </thead>
             <tbody>
                 @foreach ($products as $product)
+                @php
+                    $totalAccount = $product->account()->count();
+                @endphp
                     <tr>
                         <td>{{ $product->id }}</td>
                         <td class="truncate-text">{{ $product->name }}</td>
                         <td class="truncate-text">{{ $product->category->name }}</td>
-                        <td class="truncate-text">{{ $product->info }}</td>
+                        <td>{{ $product->account()->where('status', 1)->count() .'/'. $totalAccount }}</td>
+                        <td>{{ $product->account()->where('status', -1)->count() .'/'. $totalAccount }}</td>
+                        <td>{{ $product->account()->where('status', 0)->count() .'/'. $totalAccount }}</td>
                         <td><img src="{{ $product->image_link }}" alt="" width="50" height="50"></td>
                         <td><span class="badge {{ $product->status ? 'bg-success' : 'bg-danger' }}">
                                 {{ $product->status ? 'Đang bán' : 'Dừng bán' }}
