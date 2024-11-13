@@ -109,12 +109,41 @@ class ProductController extends Controller
             $path = $request->file('image')->store('public/images');
             $product_update['image'] = str_replace('public/', 'storage/', $path);
         }
+        
         $cycles = $product_update['price'];
         unset($product_update['price']);
+
         try {
-            $product->productCycle()->delete();
+            // Cập nhật thông tin product trước
             $product->update($product_update);
-            $product->productCycle()->createMany($cycles);
+
+            // Lấy danh sách cycle hiện có trong database
+            $existing_cycles = $product->productCycle()->get()->keyBy(function ($cycle) {
+                return $cycle->cycle_unit . '_' . $cycle->cycle_value;
+            });
+            
+            foreach ($cycles as $cycle_data) {
+                // Xác định cycle dựa trên `cycle_unit` và `cycle_value`
+                $key = $cycle_data['cycle_unit'] . '_' . $cycle_data['cycle_value'];
+                
+                if ($existing_cycles->has($key)) {
+                    // Nếu cycle đã tồn tại, ta chỉ cần cập nhật `cycle_price`
+                    $existing_cycle = $existing_cycles->get($key);
+                    $existing_cycle->update([
+                        'cycle_price' => $cycle_data['cycle_price']
+                    ]);
+                    // Xóa khỏi collection đã xử lý
+                    $existing_cycles->forget($key);
+                } else {
+                    // Nếu cycle không tồn tại trong DB, thêm mới
+                    $product->productCycle()->create($cycle_data);
+                }
+            }
+            
+            // Xóa các cycle còn lại trong $existing_cycles vì không có trong request
+            foreach ($existing_cycles as $cycle_to_delete) {
+                $cycle_to_delete->delete();
+            }
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
