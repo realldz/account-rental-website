@@ -20,14 +20,14 @@ class CommentService
             })
             ->exists();
         if (!$is_bought) {
-            return $this->fail('Bạn chưa mua sản phẩm này', 403);
+            return false;
         }
         $product->comment()->create([
             'product_id' => $product->id,
             'content' => $content,
             'user_id' => auth()->user()->id,
         ]);
-        return $this->success('Bình luận thành công');
+        return true;
     }
 
     public function reply(string $content, Comment $comment, Product $product)
@@ -38,6 +38,6 @@ class CommentService
             'content' => $content,
             'user_id' => $user->id,
         ]);
-        return $this->success('Trả lời bình luận thành công');
+        return true;
     }
 }

@@ -24,31 +24,40 @@ class CartController extends Controller
 
     public function addToCart(CartRequest $request) 
     {
-        return $this->cartService->add($request);
+        if ($this->cartService->add($request)) {
+            return $this->success('Thêm vào giỏ hàng thành công');
+        }
+        return $this->fail('Thêm vào giỏ hàng thất bại');
     }
 
     public function remove(Request $request)
     {
-        return $this->cartService->remove($request);
+        if ($this->cartService->remove($request)) {
+            return $this->success('Xóa khỏi giỏ hàng thành công');
+        } 
+        return $this->fail('Xóa khỏi giỏ hàng thất bại');
     }
     
     public function update(Request $request)
     {
-        return $this->cartService->update($request);
+        if ($this->cartService->update($request)) {
+            return $this->success('Cập nhật giỏ hàng thành công');
+        }
+        return $this->fail('Cập nhật giỏ hàng thất bại');
     }
 
     public function count()
     {
-        return $this->cartService->count();
+        return $this->success(['count' => $this->cartService->count()]);
     }
 
     public function getPrice(Request $request)
     {
-        return $this->cartService->getPrice($request);
+        return $this->success(['price' => $this->cartService->getPrice($request)]);
     }
 
     public function getTotalPrice()
     {
-        return $this->cartService->getTotalPrice();
+        return $this->success(['total' => $this->cartService->getTotalPrice()]);
     }
 }

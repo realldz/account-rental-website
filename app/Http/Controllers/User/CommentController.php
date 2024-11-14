@@ -7,10 +7,11 @@ use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Services\CommentService;
+use App\Traits\JsonResponseTrait;
 
 class CommentController extends Controller
 {
-    
+    use JsonResponseTrait;
     private CommentService $commentService;
     public function __construct() {
         $this->middleware(function ($request, $next) {
@@ -20,10 +21,16 @@ class CommentController extends Controller
     }
     
     public function create(CommentRequest $request, Product $product) {
-        return $this->commentService->create($request->content, $product);
+        if ($this->commentService->create($request->content, $product)) {
+            return $this->success('Bình luận thành công');
+        }
+        return $this->fail('Bạn chưa mua sản phẩm này');
     }
 
     public function reply(CommentRequest $request, Product $product, Comment $comment) {
-        return $this->commentService->reply($request->content, $comment, $product);
+        if ($this->commentService->reply($request->content, $comment, $product)) {
+            return $this->success('Trả lời bình luận thành công');
+        }
+        return $this->fail('Trả lời bình luận thất bại');
     }
 }
