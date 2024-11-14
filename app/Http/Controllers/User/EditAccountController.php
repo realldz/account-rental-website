@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EditAccountRequest;
+use App\Http\Requests\User\EditAccountRequest;
 use App\Models\User;
 use Auth;
 use Hash;

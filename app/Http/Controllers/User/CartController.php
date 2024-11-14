@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CartRequest;
+use App\Http\Requests\User\CartRequest;
 use App\Services\CartService;
 use App\Traits\JsonResponseTrait;
 use Illuminate\Http\Request;

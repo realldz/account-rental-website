@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AccountRequest;
+use App\Http\Requests\Admin\AccountRequest;
 use App\Models\Account;
 use App\Models\Product;
 use App\Traits\CrudTrait;

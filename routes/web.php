@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Guest;
 use Auth;
 use Illuminate\Support\Facades\Route;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductStoreRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,10 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'name' =>'required|string|max:255',
-            'info' =>'required|string',
-            'price' => 'required|array',
-            'category_id' =>'required|integer|exists:categories,id',
-            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:1024768',
-            'status' => 'boolean|required'
+            'email' =>'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'status' => 'required|boolean',
+            'is_admin' => 'required|boolean',
         ];
     }
 }
