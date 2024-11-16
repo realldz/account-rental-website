@@ -4,7 +4,7 @@ namespace App\Interfaces;
 
 interface PaymentGatewayInterface
 {
-    public function form();
-    public function pay();
-    public function notify();
+    public static function form();
+    public function pay($order);
+    public function notify($request);
 }

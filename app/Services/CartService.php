@@ -13,9 +13,19 @@ class CartService
     {
         $this->user = Auth::user();
     }
+
+    public function getUserCart($user) {
+        return $user->cart()->get();
+    }
+
+    public function clearCart($user)
+    {
+        return $user->cart()->delete();
+    }
+
     public function add($request): bool
     {
-        $cart = $this->user->cart();
+        $cart = $this->getUserCart($this->user);
         $product_in_cart = $cart->where('product_id', $request->product_id)->where('cycle_id', $request->cycle_id)->first();
         if ($product_in_cart) {
             $product_in_cart->amount += $request->amount;
@@ -33,14 +43,14 @@ class CartService
         ]);
         return true;
     }
-    public function remove($request)
+    public function remove($request): bool
     {
         $cart_item = $this->user->cart()->where('id', $request->cart_item_id)->first();
         $cart_item->delete();
         return true;
     }
 
-    public function update($request)
+    public function update($request): bool
     {
         $cart_item = $this->user->cart()->where('id', $request->cart_item_id)->first();
         // return $request;
@@ -49,12 +59,12 @@ class CartService
         return true;
     }
 
-    public function count()
+    public function count(): int
     {
         return $this->user->cart()->count();
     }
 
-    public function getPrice($request)
+    public function getPrice($request): float
     {
         $cart_item = $this->user->cart()->where('id', $request->cart_item_id)->first();
         $amount = $cart_item->amount;
@@ -62,9 +72,9 @@ class CartService
         $price = $amount * $price_per_one;
         return $price;
     }
-    public function getTotalPrice()
+    public function getTotalPrice(): float|int
     {
-        $carts = $this->user->cart()->get();
+        $carts = $this->getUserCart($this->user);
         $total = 0;
         foreach ($carts as $cart) {
             $product = Product::where('id', $cart->product_id)->where('status', 1)->first();

@@ -65,6 +65,14 @@ class BuildAdminMenu
                 'route'  => 'admin.account.index',
                 'icon' => 'fas fa-fw fa-user',
             ],
+            [
+                'header' => 'Cấu hình'
+            ],
+            [
+                'text' => 'Thanh toán',
+                'route'  => 'admin.config.payment.index',
+                'icon' => 'fas fa-fw fa-user',
+            ],
         );
     }
 }
