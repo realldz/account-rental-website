@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\Guest\LoginRequest;
+use App\Http\Requests\Guest\RegisterRequest;
 use App\Models\User;
 use Auth;
 use Hash;

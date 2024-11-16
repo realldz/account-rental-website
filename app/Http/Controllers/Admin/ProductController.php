@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductEditRequest;
-use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\Admin\ProductEditRequest;
+use App\Http\Requests\Admin\ProductStoreRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Traits\CrudTrait;
