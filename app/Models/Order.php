@@ -19,4 +19,17 @@ class Order extends Model
     public function item(): HasMany {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function getFormattedTotalPriceAttribute() {
+        return number_format($this->total_price, 0, ',', ',');
+    }
+    public function complete() {
+        $this->status = 1;
+        $this->save();
+    }
+
+    public function close() {
+        $this->status = -1;
+        $this->save();
+    }
 }

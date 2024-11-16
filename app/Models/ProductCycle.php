@@ -28,4 +28,18 @@ class ProductCycle extends Model
                 return 'Năm';
         }   
     }
+
+    public function getCycleUnitToStringAttribute()
+    {
+        switch ($this->cycle_unit) {
+            case 1:
+                return 'day';
+            case 2:
+                return 'week';
+            case 3:
+                return 'month';
+            case 4:
+                return 'year';
+        }   
+    }
 }
