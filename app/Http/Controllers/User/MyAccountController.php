@@ -11,7 +11,7 @@ class MyAccountController extends Controller
     public function index() {
         $title = 'Tài khoản';
         $user = Auth::user();
-        $orders = $user->orders();
+        $orders = $user->orders()->orderByDesc('id')->take(5);
         return view('user.pages.myaccount', compact('user', 'orders', 'title'));
     }
 }

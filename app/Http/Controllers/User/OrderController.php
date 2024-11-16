@@ -32,7 +32,7 @@ class OrderController extends Controller
     {
         $title = 'Tài khoản';
         $user = $this->user;
-        $orders = $user->orders()->simplePaginate(5);
+        $orders = $user->orders()->orderByDesc('id')->simplePaginate(5);
         return view('user.pages.order', compact('orders', 'user', 'title'));
     }
 
@@ -46,8 +46,9 @@ class OrderController extends Controller
      */
     public function show(int $id)
     {
+        $title = 'Tài khoản';
         $user = $this->user;
         $order = $this->user->orders()->findOrFail($id);
-        return view('user.pages.orderInfo', compact('order', 'user'));
+        return view('user.pages.orderInfo', compact('order', 'user', 'title'));
     }
 }
