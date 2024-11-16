@@ -16,9 +16,12 @@
                         </div>
                     </div>
                 </div>
-
+                <div id="checkout-page-loading-overlay" class="checkout-loading-overlay" style="display: none;">
+                    <div class="checkout-loader"></div>
+                </div>
                 <form name="checkout" method="post" class="checkout woocommerce-checkout "
-                    action="" enctype="multipart/form-data" novalidate="novalidate">
+                    action="{{ route('user.payment.pay') }}" enctype="multipart/form-data" novalidate="novalidate">
+                    @csrf
                     <div class="row checkout-custom ">
                         <div class="large-8 col checkout-left ">
                             <div class="col-inner">
@@ -159,40 +162,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- <tr class="cart_item">
-                                                    <td class="product-name">
-                                                        Mua Tài khoản Netflix Premium-Cookies, 7 ngày&nbsp; <strong
-                                                            class="product-quantity">×&nbsp;1</strong>
-                                                        <dl class="variation">
-                                                            <dt class="variation-Gingk">Gói đăng ký:</dt>
-                                                            <dd class="variation-Gingk">
-                                                                <p>Cookies</p>
-                                                            </dd>
-                                                        </dl>
-                                                    </td>
-                                                    <td class="product-total">
-                                                        <span class="woocommerce-Price-amount amount"><bdi><span
-                                                                    class="woocommerce-Price-amount amount">19,000</span><span
-                                                                    class="woocommerce-Price-currencySymbol">đ</span></bdi></span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="cart_item">
-                                                    <td class="product-name">
-                                                        Mua Tài khoản Netflix Premium-Việt Nam, 01 tháng&nbsp; <strong
-                                                            class="product-quantity">×&nbsp;1</strong>
-                                                        <dl class="variation">
-                                                            <dt class="variation-Gingk">Gói đăng ký:</dt>
-                                                            <dd class="variation-Gingk">
-                                                                <p>Việt Nam</p>
-                                                            </dd>
-                                                        </dl>
-                                                    </td>
-                                                    <td class="product-total">
-                                                        <span class="woocommerce-Price-amount amount"><bdi><span
-                                                                    class="woocommerce-Price-amount amount">89,000</span><span
-                                                                    class="woocommerce-Price-currencySymbol">đ</span></bdi></span>
-                                                    </td>
-                                                </tr> --}}
                                             </tbody>
                                             <tfoot>
                                                 <tr class="cart-subtotal">
@@ -214,18 +183,20 @@
                                         <div id="payment" class="woocommerce-checkout-payment"
                                             style="position: static; zoom: 1;">
                                             <ul class="wc_payment_methods payment_methods methods">
-                                                <li class="wc_payment_method payment_method_momo">
-                                                    <input id="payment_method_momo" type="radio" class="input-radio"
-                                                        name="payment_method" value="momo" data-order_button_text="">
+                                                @foreach ($payments as $payment)
+                                                <li class="wc_payment_method payment_method_{{ $payment->code }}">
+                                                    <input id="payment_method_{{ $payment->code }}" type="radio" class="input-radio"
+                                                        name="payment_method" value="{{ $payment->code }}" data-order_button_text="">
 
-                                                    <label for="payment_method_momo">
-                                                        Thanh toán bằng ví MoMo <img
-                                                            src=""
-                                                            alt="Thanh toán bằng ví MoMo"> </label>
-                                                    <div class="payment_box payment_method_momo" style="display:none;">
-                                                        <p>Quét mã thanh toán tới nhà cung cấp dịch vụ là</p>
+                                                    <label for="payment_method_{{ $payment->code }}">
+                                                        {{ $payment->name }} <img
+                                                            src="{{ $payment->icon }}"
+                                                            alt="{{ $payment->name }}" width="50" height="50"> </label>
+                                                    <div class="payment_box payment_method_{{ $payment->code }}" style="display:none;">
+                                                        <p>{{ $payment->description }}</p>
                                                     </div>
                                                 </li>
+                                                @endforeach
                                             </ul>
                                             <div class="form-row place-order">
                                                 <noscript>
@@ -238,18 +209,9 @@
                                                 </noscript>
 
                                                 <div class="woocommerce-terms-and-conditions-wrapper mb-half">
-
                                                 </div>
-
-
-                                                <button type="submit" class="button alt"
-                                                    name="woocommerce_checkout_place_order" id="place_order"
+                                                <button type="submit" class="button alt" id="place_order"
                                                     value="Đặt hàng" data-value="Đặt hàng">Đặt hàng</button>
-
-                                                <input type="hidden" id="woocommerce-process-checkout-nonce"
-                                                    name="woocommerce-process-checkout-nonce" value="9b823da166"><input
-                                                    type="hidden" name="_wp_http_referer"
-                                                    value="/?wc-ajax=update_order_review">
                                             </div>
                                         </div>
                                     </div>
@@ -317,7 +279,7 @@
         // $('.payment_box').show();
         $('.wc_payment_method').on('click', function() {
             $('.payment_box').hide().removeClass('open');
-            console.log($(this).children('.payment_box').show().addClass('open'));
+            $(this).children('.payment_box').show().addClass('open');
         });
         //TODO
         $('.plus').on('click', function() {
@@ -369,6 +331,36 @@
                 });
             })
         });
+
+        $('#place_order').on('click', function(event) {
+            $('#checkout-page-loading-overlay').show();
+            event.preventDefault();
+            const self = this;
+            const ajaxRequest = $.ajax({
+                url: "{{ route('user.payment.pay') }}",
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    payment_method: $('input[name="payment_method"]:checked').val(),
+                },
+            });
+            ajaxRequest.done(function(r) {
+                toast({
+                    title: 'Thông tin',
+                    text: 'Đang chuyển tới trang thanh toán',
+                    icon: 'info',
+                })
+                setTimeout(() => window.location.href = r.message, 1500);
+                
+            }).fail(function(r) {
+                $('#checkout-page-loading-overlay').hide();
+                toast({
+                    title: 'Lỗi',
+                    text: r.responseJSON.message,
+                    icon: 'error',
+                });
+            })
+        })
         function setAmount(e, i) {
             var amount = parseInt($(e).parent().parent().children('.gpls-arcw-quantity-input').val());
             if (amount + i < 1) {

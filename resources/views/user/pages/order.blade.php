@@ -61,7 +61,7 @@
                                 data-title="Tổng">
 
                                 <span class="woocommerce-Price-amount amount"><span
-                                        class="woocommerce-Price-amount amount">{{ $order->total_price }}</span><span
+                                        class="woocommerce-Price-amount amount">{{ $order->formatted_total_price }}</span><span
                                         class="woocommerce-Price-currencySymbol">đ</span></span> cho {{ $order->item()->count() }} mục
 
                             </td>
@@ -78,7 +78,7 @@
             </div>
             
             <div class="woocommerce-pagination woocommerce-pagination--without-numbers woocommerce-Pagination">
-                {{ $orders->links() }}
+                {{ $orders->links('vendor.pagination.simple-user-order') }}
             </div>
         </div>
     </div>

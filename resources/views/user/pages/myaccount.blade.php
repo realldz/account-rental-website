@@ -32,7 +32,7 @@
                         <div class="name">Số tiền chi tiêu</div>
                         <div class="value">
                             <span class="woocommerce-Price-amount amount"><bdi><span
-                                        class="woocommerce-Price-amount amount">{{ $orders->sum('total_price') }}</span><span
+                                        class="woocommerce-Price-amount amount">{{ number_format((clone $orders)->where('status', 1)->sum('total_price'), 0, ',', ',') }}</span><span
                                         class="woocommerce-Price-currencySymbol">đ</span></bdi></span>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                                     @endswitch
                                 </td>
                                 <td><span class="woocommerce-Price-amount amount"><bdi><span
-                                                class="woocommerce-Price-amount amount">{{ $order->total_price }}</span><span
+                                                class="woocommerce-Price-amount amount">{{ $order->formatted_total_price }}</span><span
                                                 class="woocommerce-Price-currencySymbol">đ</span></bdi></span>
                                 </td>
                                 <td><a href="{{ route('user.my-account.order.show', $order->id) }}" target="_blank">Xem</a></td>

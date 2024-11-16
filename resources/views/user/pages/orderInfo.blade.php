@@ -2,7 +2,15 @@
 @section('content')
     <div class="woocommerce">
         <div class="woocommerce-MyAccount-content">
-            <div class="woocommerce-notices-wrapper"></div>
+            <div class="woocommerce-notices-wrapper">
+                @if (Session::has('successMsg'))
+                    <li>{{ Session::get('successMsg') }}</li>
+                @elseif ($errors->any())
+                    @foreach ($errors->all() as $e)
+                        <li>{{ $e }}</li>
+                    @endforeach
+                @endif
+            </div>
             <p>
                 Đơn hàng #<mark class="order-number">{{ $order->id }}</mark> đã được đặt lúc <mark class="order-date">{{ $order->created_at }}</mark> và
                 hiện tại là <mark class="order-status">{{ $order->status }}</mark>.</p>
@@ -85,7 +93,7 @@
                     </tbody>
                 </table>
                 <p class="order-again">
-                    <a href="" class="button">Đặt hàng lại</a>
+                    <a href="" class="button">Gia hạn thuê</a>
                 </p>
             </section>
         </div>

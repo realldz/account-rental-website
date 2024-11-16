@@ -8,7 +8,7 @@
                         <div class="img has-hover x md-x lg-x y md-y lg-y" id="image_2103573886">
                             <div class="img-inner dark">
                                 <img width="738" height="37"
-                                    src="../assets/images/Payment-ngang-1.png"
+                                    src="/assets/images/Payment-ngang-1.png"
                                     class="attachment-original size-original wp-post-image" alt=""
                                     decoding="async"
                                     sizes="(max-width: 738px) 100vw, 738px" />
@@ -47,7 +47,7 @@
                         <div class="img has-hover mg0 x md-x lg-x y md-y lg-y" id="image_216331686">
                             <div class="img-inner dark">
                                 <img width="1020" height="574"
-                                    src="../assets/images/"
+                                    src="/assets/images/"
                                     class="attachment-large size-large wp-post-image" alt="Logo"
                                     decoding="async"
                                     sizes="(max-width: 1020px) 100vw, 1020px" />
@@ -80,7 +80,7 @@
                                             target="_blank" rel="noopener">
                                             <div class="img-inner dark" style="margin:0px 0px 0px 0px;">
                                                 <img width="851" height="256"
-                                                    src="../assets/images/Zalo-PNG-3.png"
+                                                    src="/assets/images/Zalo-PNG-3.png"
                                                     class="attachment-large size-large wp-post-image"
                                                     alt="Zalo PNG" decoding="async"
                                                     sizes="(max-width: 851px) 100vw, 851px" />
@@ -107,7 +107,7 @@
                                             target="_blank" rel="noopener">
                                             <div class="img-inner dark" style="margin:0px 0px 0px -30px;">
                                                 <img width="851" height="256"
-                                                    src="../assets/images/Fanpage-PNG.png"
+                                                    src="/assets/images/Fanpage-PNG.png"
                                                     class="attachment-large size-large wp-post-image"
                                                     alt="Fanpage PNG" decoding="async"
                                                     sizes="(max-width: 851px) 100vw, 851px" />
@@ -134,7 +134,7 @@
                                             rel="noopener">
                                             <div class="img-inner dark" style="margin:0px 0px 0px -45px;">
                                                 <img width="1020" height="209"
-                                                    src="../assets/images/Telegram-PNG-1024x210.png"
+                                                    src="/assets/images/Telegram-PNG-1024x210.png"
                                                     class="attachment-large size-large wp-post-image"
                                                     alt="Telegram PNG" decoding="async"
                                                     sizes="(max-width: 1020px) 100vw, 1020px" />
