@@ -11,4 +11,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::resource('account', AccountController::class)->except(['show']);
     Route::resource('order', OrderController::class)->only(['index', 'show', 'update']);
     Route::resource('comment', CommentController::class);
+    Route::prefix('config')->name('config.')->group(function () {
+        Route::get('payment/fields', [PaymentController::class, 'getField'])->name('payment.fields');
+        Route::resource('payment', PaymentController::class);
+
+    });
 });

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/product/{slug}', [ProductController::class, 'index'])->name('product');
+Route::get('/payment/notify/{payment:code}', [PaymentController::class, 'notify'])->name('payment.notify');
 Route::get('search', [SearchController::class, 'index'])->name('search');
 Route::get('auth', [AuthController::class, 'index'])->name('auth')->middleware('guest');
 Route::prefix('auth')->name('auth.')->group(function () {
