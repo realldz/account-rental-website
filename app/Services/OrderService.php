@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Order;
+use App\Models\Account;
 
 class OrderService
 {
@@ -26,5 +26,17 @@ class OrderService
         if (!$order->item()->createMany($orderItems)) {
             throw new \Exception('Unable to create order items');
         }
+    }
+
+    public function completeOrder($order) {
+        $order->item()->whereNull('account')->get()->each(function ($item) {
+            $account = Account::where('product_id', $item->product_id)->where('status', 0)->first();
+            if ($account) {
+                $item->update(['account' => $account->info]);
+                $account->update(['status' => 1]);
+            } else {
+                $item->update(['account' => 'Out of stock']);
+            }
+        });
     }
 }

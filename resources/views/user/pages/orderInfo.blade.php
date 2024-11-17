@@ -79,14 +79,20 @@
                     <thead>
                         <tr>
                             <th style="text-align:left;width: 20%;"><strong>Product</strong></th>
-                            <th style="text-align:left;width: 80%;"><strong>Chi tiết tài khoản</strong></th>
+                            <th style="text-align:left;width: 50%;"><strong>Chi tiết tài khoản</strong></th>
+                            <th style="text-align:left;width: 10%;"><strong>Giá</strong></th>
+                            <th style="text-align:left;width: 10%;"><strong>Bắt đầu thuê</strong></th>
+                            <th style="text-align:left;width: 10%;"><strong>Kết thúc thuê</strong></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($order->item as $item)
                         <tr>
                             <td style="text-align:left;width: 20%;">{{ $item->product->name }}</td>
-                            <td style="text-align:left;width: 80%;">{{ $item->account }} <br></td>
+                            <td style="text-align:left;width: 50%;">{{ $item->account }} <br></td>
+                            <td style="text-align:left;width: 10%;">{{ $item->formated_price }} <br></td>
+                            <td style="text-align:left;width: 10%;">{{ $item->start_date }} <br></td>
+                            <td style="text-align:left;width: 10%;">{{ $item->end_date }} <br></td>
                         </tr>
                         @endforeach
 
