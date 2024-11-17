@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderItem;
+use App\Models\Product;
+use App\Models\ProductCycle;
 use App\Models\User;
+use App\Services\CartService;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -50,5 +54,25 @@ class OrderController extends Controller
         $user = $this->user;
         $order = $this->user->orders()->findOrFail($id);
         return view('user.pages.orderInfo', compact('order', 'user', 'title'));
+    }
+
+    public function renew(Request $request) {
+        $cartService = new CartService();
+        $success = false;
+        foreach ($request->renew as $key => $value) {
+            if ($value == null || $key == null) {
+                continue;
+            }
+            $order_item = OrderItem::findOrFail($key);
+            $cycle = ProductCycle::findOrFail($value);
+
+            if ($cartService->add($order_item->product->id, $cycle->id, 1, $order_item->id)) {
+                $success = true;
+            }
+        }
+        if (!$success) {
+            return redirect()->route('user.checkout.index')->withErrors( 'Một số sản phẩm không thể thêm vào giỏ hàng');
+        }
+        return redirect()->route('user.checkout.index')->with('successMsg', 'Đã thêm sản phẩm vào giỏ hàng');
     }
 }

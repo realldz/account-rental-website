@@ -19,4 +19,9 @@ class Cart extends Model
     {
         return $this->belongsTo(ProductCycle::class, 'cycle_id');
     }
+
+    public function renewFor(): BelongsTo
+    {
+        return $this->belongsTo(OrderItem::class, 'renew_for', 'id');
+    }
 }

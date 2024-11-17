@@ -24,7 +24,7 @@ class CartController extends Controller
 
     public function addToCart(CartRequest $request) 
     {
-        if ($this->cartService->add($request)) {
+        if ($this->cartService->add($request->product_id, $request->cycle_id, $request->amount)) {
             return $this->success('Thêm vào giỏ hàng thành công');
         }
         return $this->fail('Thêm vào giỏ hàng thất bại');

@@ -25,6 +25,13 @@
                     <div class="row checkout-custom ">
                         <div class="large-8 col checkout-left ">
                             <div class="col-inner">
+                                @if (Session::has('successMsg'))
+                                    {{ Session::get('successMsg') }}
+                                @elseif ($errors->any())
+                                    @foreach ($errors->all() as $e)
+                                        <li>{{ $e }}</li>
+                                    @endforeach
+                                @endif
                                 <div class="woocommerce-notices-wrapper"></div>
                                 <div class="woocommerce">
                                     <div class=" pb-0 cart-auto-refresh">
@@ -86,6 +93,14 @@
                                                                         <p>{{ $cart_item->productCycle->cycle_value }} {{ $cart_item->productCycle->cycle_label }}</p>
                                                                     </dd>
                                                                 </dl>
+                                                                @if($cart_item->renew_for)
+                                                                <dl class="variation">
+                                                                    <dt class="variation-Gingk">Ghi chú:</dt>
+                                                                    <dd class="variation-Gingk">
+                                                                        <p>Gia hạn cho: đơn hàng {{ $cart_item->renewFor->order->id }}#{{ $cart_item->renew_for }}</p>
+                                                                    </dd>
+                                                                </dl>
+                                                                @endif
                                                                 <div class="mobile-product-price">
                                                                     <span class="mobile-product-price__qty">
                                                                         <span class="woocommerce-Price-amount amount"><bdi><span
@@ -94,8 +109,9 @@
                                                                     </span>
                                                                 </div>
                                                             </td>
-
+                                                            
                                                             <td class="product-quantity" data-title="Số lượng">
+                                                                @if(!$cart_item->renew_for)
                                                                 <div class="quantity-title">
                                                                     Số lượng
                                                                 </div>
@@ -114,7 +130,7 @@
                                                                         class="input-text qty text gpls-arcw-quantity-input"
                                                                         name="cart[{{ $cart_item->id }}][qty]"
                                                                         value="{{ $cart_item->amount }}" aria-label="Số lượng sản phẩm"
-                                                                        size="4" min="0" max=""
+                                                                        size="4" min="0" max="5"
                                                                         step="1" placeholder="" inputmode="numeric" 
                                                                         data-cart-id="{{ $cart_item->id }}"
                                                                         autocomplete="off">
@@ -127,7 +143,9 @@
                                                                             class="ux-quantity__button ux-quantity__button--plus button plus is-form">
                                                                     </div>
                                                                 </div>
+                                                                @endif
                                                             </td>
+                                                            
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

@@ -31,9 +31,15 @@ class OrderService
     public function completeOrder($order) {
         $order->item()->whereNull('account')->get()->each(function ($item) {
             $account = Account::where('product_id', $item->product_id)->where('status', 0)->first();
-            if ($account) {
+            if ((clone $item)->olditem) {
+                $account = (clone $item)->oldItem->account;
+                $item->update(['account' => $account]);
+                (clone $item)->oldItem->update(['account' => null]);
+
+            } else if ($account) {
                 $item->update(['account' => $account->info]);
                 $account->update(['status' => 1]);
+
             } else {
                 $item->update(['account' => 'Out of stock']);
             }

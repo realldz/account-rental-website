@@ -20,6 +20,9 @@ class OrderItem extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function oldItem(): HasOne {
+        return $this->hasOne(OrderItem::class, 'id', 'old_item');
+    }
 
     public function getFormatedPriceAttribute() {
         return number_format($this->price, 0, ',', ',');
