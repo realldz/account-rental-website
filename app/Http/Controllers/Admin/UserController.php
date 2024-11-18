@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserEditRequest;
-use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\Admin\UserEditRequest;
+use App\Http\Requests\Admin\UserStoreRequest;
 use App\Models\User;
 use App\Traits\CrudTrait;
 use Illuminate\Http\Request;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CommentRequest;
+use App\Http\Requests\Admin\CommentRequest;
 use App\Models\Comment;
 use App\Traits\CrudTrait;
 use Auth;
