@@ -75,6 +75,9 @@
 @push('js')
     <script>
         $(document).ready(function() {
+            $('.js-example-basic-single').select2({
+                theme: 'bootstrap4',
+            });
             @isset($account)
             $('#inputInfo').val(@json(old('info') ?? $account->info));
             $("input[name='status'][value='{{ $account->status }}']").click();

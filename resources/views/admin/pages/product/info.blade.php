@@ -90,6 +90,9 @@
     <script>
         $(document).ready(function() {
             // Khởi tạo Summernote
+            $('.js-example-basic-single').select2({
+                theme: 'bootstrap4',
+            });
             $('#summernote').summernote({
                 width: '100%',
                 height: 200,
