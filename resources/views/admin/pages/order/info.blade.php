@@ -41,6 +41,7 @@
                         <th>Giá</th>
                         <th>Thời gian bắt đầu</th>
                         <th>Thời gian kết thúc</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,11 @@
                             <td>{{ $item->price }}đ</td>
                             <td>{{ $item->start_date }}</td>
                             <td>{{ $item->end_date }}</td>
+                            <td>
+                                <a href="{{ route('admin.orderItem.edit', $item->id) }}" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
