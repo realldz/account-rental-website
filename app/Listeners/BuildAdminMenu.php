@@ -40,12 +40,12 @@ class BuildAdminMenu
             [
                 'text' => 'Quản lí đơn hàng',
                 'route'  => 'admin.order.index',
-                'icon' => 'fas fa-fw fa-user',
+                'icon' => 'fas fa-fw fa-shopping-cart',
             ],
             [
                 'text' => 'Quản lí bình luận',
                 'route'  => 'admin.comment.index',
-                'icon' => 'fas fa-fw fa-user',
+                'icon' => 'fas fa-fw fa-comment',
             ],
             [
                 'header' => 'Sản phẩm'
@@ -53,17 +53,17 @@ class BuildAdminMenu
             [
                 'text' => 'Quản lí danh mục',
                 'route'  => 'admin.category.index',
-                'icon' => 'fas fa-fw fa-user',
+                'icon' => 'fas fa-fw fa-folder',
             ],
             [
                 'text' => 'Quản lí sản phẩm',
                 'route'  => 'admin.product.index',
-                'icon' => 'fas fa-fw fa-user',
+                'icon' => 'fas fa-fw fa-file',
             ],
             [
                 'text' => 'Quản lí tài khoản',
                 'route'  => 'admin.account.index',
-                'icon' => 'fas fa-fw fa-user',
+                'icon' => 'fas fa-fw fa-cookie-bite',
             ],
             [
                 'header' => 'Cấu hình'
@@ -71,7 +71,7 @@ class BuildAdminMenu
             [
                 'text' => 'Thanh toán',
                 'route'  => 'admin.config.payment.index',
-                'icon' => 'fas fa-fw fa-user',
+                'icon' => 'fas fa-fw fa-credit-card',
             ],
         );
     }

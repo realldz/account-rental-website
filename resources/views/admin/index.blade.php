@@ -10,35 +10,35 @@
     <div class="row">
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $totalUser }}" text="Người dùng" icon="fas fa-user-plus" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.user.index') }}" url-text="View details" />
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $totalProduct }}" text="Sản phẩm" icon="fas fa-book" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.product.index') }}" url-text="View details" />
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $totalAccount }}" text="Tài khoản" icon="fas fa-cookie-bite" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.account.index') }}" url-text="View details" />
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $totalOrder }}" text="Đơn hàng" icon="fas fa-shopping-cart" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.order.index') }}" url-text="View details" />
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $newUserToday }}" text="Người dùng mới hôm nay" icon="fas fa-shopping-cart" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.user.index') }}" url-text="View details" />
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $newOrderToday }}" text="Đơn hàng mới hôm nay" icon="fas fa-shopping-cart" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.order.index') }}" url-text="View details" />
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $newOrderSuccessToday }}" text="Đơn hàng đã hoàn thành hôm nay" icon="fas fa-shopping-cart" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.order.index') }}" url-text="View details" />
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $productForSale }}" text="Sản phẩm đang bán" icon="fas fa-shopping-cart" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.product.index') }}" url-text="View details" />
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ number_format($revenueToday, 0, ',', ',') }}" text="Doanh thu hôm nay" icon="fas fa-shopping-cart" theme="success"
@@ -54,7 +54,7 @@
         </div>
         <div class="col-lg-3 col-6">
             <x-adminlte-small-box title="{{ $accountRenting }}" text="Tài khoản đang được thuê" icon="fas fa-shopping-cart" theme="success"
-                url="#" url-text="View details" />
+                url="{{ route('admin.account.index') }}" url-text="View details" />
         </div>
 
     </div>
