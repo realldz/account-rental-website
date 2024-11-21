@@ -12,7 +12,7 @@ class CheckOutController extends Controller
         $title = 'Thanh toán';
         $user = auth()->user();
         $cart_items = $user->cart()->get();
-        $payments = Payment::where('enable', 1)->get();
+        $payments = Payment::where('enable', 1)->orderBy('sort', 'asc')->get();
         return view('user.pages.checkout', compact('cart_items', 'title', 'payments'));
     }
 }
