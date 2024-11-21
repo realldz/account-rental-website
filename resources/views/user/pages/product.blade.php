@@ -700,8 +700,8 @@
 @include('user.js.toast')
 @include('user.js.getCartCount')
     <script>
-        function addToCart() {
-            $('.single_add_to_cart_button').addClass('loading');
+        function addToCart(self) {
+            $(self).addClass('loading');
             const cycle_id = $('.rtwpvs-button-term.selected').attr('data-term');
             if (!cycle_id) {
                 toast({
@@ -709,7 +709,7 @@
                     text: 'Vui lòng chọn thời hạn sản phẩm',
                     icon: 'error',
                 });
-                $('.single_add_to_cart_button').removeClass('loading');
+                $(self).removeClass('loading');
                 return Promise.resolve(false);
             }
 
@@ -760,10 +760,10 @@
             $('.devvn_readmore_flatsome_less').hide();
         });
         $('.single_add_to_cart').click(function() {
-            addToCart();
+            addToCart(this);
         });
         $('.single_buy_now').click(function() {
-            addToCart().then((result) => {
+            addToCart(this).then((result) => {
                 if (result) {
                     setTimeout(() => window.location.href = "{{ route('user.checkout.index') }}", 1500);
                 }
