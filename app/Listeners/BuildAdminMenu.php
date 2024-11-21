@@ -66,6 +66,14 @@ class BuildAdminMenu
                 'icon' => 'fas fa-fw fa-cookie-bite',
             ],
             [
+                'header' => 'Thống kê'
+            ],
+            [
+                'text' => 'Thống kê',
+                'route'  => 'admin.statistics.index',
+                'icon' => 'fas fa-fw fa-folder',
+            ],
+            [
                 'header' => 'Cấu hình'
             ],
             [

@@ -12,6 +12,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::resource('order', OrderController::class)->only(['index', 'show', 'update']);
     Route::resource('orderItem', OrderItemController::class)->only(['edit', 'update']);
     Route::resource('comment', CommentController::class);
+    Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
     Route::prefix('config')->name('config.')->group(function () {
         Route::get('payment/fields', [PaymentController::class, 'getField'])->name('payment.fields');
         Route::resource('payment', PaymentController::class);

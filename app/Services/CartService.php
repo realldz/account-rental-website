@@ -74,6 +74,9 @@ class CartService
             return false;
         }
         // return $request;
+        if ($request->amount <= 0) {
+            return false;
+        }
         $cart_item->amount = $request->amount;
         $cart_item->save();
         return true;
