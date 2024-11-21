@@ -257,9 +257,8 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/',
-    'logout_url' => '/auth/logout',
-    'logout_method' => 'GET',
+    'dashboard_url' => 'admin',
+    'logout_url' => 'auth/logout',
     'login_url' => 'login',
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
