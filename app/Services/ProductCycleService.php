@@ -11,7 +11,7 @@ class ProductCycleService
         $orderItems = [];
         foreach ($carts as $cart) {
             $remaining_account = $cart->productCycle->product->account()->where('status', 0)->count();
-            if ($remaining_account < $cart->amount) {
+            if ($remaining_account < $cart->amount && !$cart->renew_for) {
                 throw new \Exception("Không đủ số lượng tài khoản cho sản phẩm " . $cart->productCycle->product->name);
             }
             for ($i = 0; $i < $cart->amount; $i++) {
