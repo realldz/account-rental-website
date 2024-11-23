@@ -26,5 +26,6 @@ Route::prefix('auth')->name('auth.')->group(function () {
         Auth::logout();
         return redirect()->route('index');
     })->name('logout');
-    Route::match(['get', 'post'],'reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
+    Route::match(['get', 'post'],'reset-password/{token?}', [AuthController::class, 'resetPassword'])->name('reset-password');
+    Route::post('change-password', [AuthController::class, 'changePassword'])->name('change-password');
 });
