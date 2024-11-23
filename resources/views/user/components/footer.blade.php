@@ -47,7 +47,7 @@
                         <div class="img has-hover mg0 x md-x lg-x y md-y lg-y" id="image_216331686">
                             <div class="img-inner dark">
                                 <img width="1020" height="574"
-                                    src="/assets/images/"
+                                    src="/assets/images/logo.png"
                                     class="attachment-large size-large wp-post-image" alt="Logo"
                                     decoding="async"
                                     sizes="(max-width: 1020px) 100vw, 1020px" />

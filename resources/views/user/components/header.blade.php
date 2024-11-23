@@ -4,11 +4,11 @@
             <div class="header-inner flex-row container logo-left medium-logo-center" role="navigation">
                 <div id="logo" class="flex-col logo"><a href="{{ route('index') }}"
                         title="Title" rel="home">
-                        <img width="1020" height="574" src=""
+                        <img width="1020" height="574" src="/assets/images/logo.png"
                             class="header_logo header-logo" alt="Logo" /> <img
-                            src="" alt=""
+                            src="/assets/images/logo.png" alt=""
                             class="logo-icon-mobile">
-                        <img width="1020" height="574" src=""
+                        <img width="1020" height="574" src="/assets/images/logo.png"
                             class="header-logo-dark" alt="Logo" /></a></div>
                 <div class="flex-col show-for-medium flex-left">
                     <ul class="mobile-nav nav nav-left ">
