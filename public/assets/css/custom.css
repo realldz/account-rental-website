@@ -1242,10 +1242,10 @@ ul.product_list_widget li img {
     color: #fff;
 }
 
-.woocommerce-orders-table a.button {
+/* .woocommerce-orders-table a.button {
     margin: 0;
     border-radius: 99px;
-}
+} */
 
 
 @media(min-width:1024px) {
