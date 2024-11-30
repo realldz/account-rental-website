@@ -69,6 +69,10 @@ class ProductController extends Controller
         $product_create = $request->validated();
         
         $cycles = $product_create['price'];
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('public/images');
+            $product_create['image'] = str_replace('public/', 'storage/', $path);
+        }
         unset($product_create['price']);
         $product = Product::create($product_create);
         $product->productCycle()->createMany($cycles);
