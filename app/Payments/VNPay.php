@@ -98,5 +98,6 @@ class VNPay implements PaymentGatewayInterface
                     ];
             }
         }
+        abort(400);
     }
 }
