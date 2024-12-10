@@ -39,7 +39,7 @@ class VNPay implements PaymentGatewayInterface
             "vnp_Command" => "pay",
             "vnp_CreateDate" => $start_time,
             "vnp_CurrCode" => "VND",
-            "vnp_IpAddr" => '127.0.0.1',
+            "vnp_IpAddr" => request()->getClientIp(),
             "vnp_Locale" => 'vn', 
             "vnp_OrderInfo" => "Thanh toan GD: $order->id",
             "vnp_OrderType" => "other",
