@@ -10,7 +10,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::resource('category', CategoryController::class)->except(['show'] );
     Route::resource('account', AccountController::class)->except(['show']);
     Route::resource('order', OrderController::class)->only(['index', 'show', 'update']);
-    Route::resource('orderItem', OrderItemController::class)->only(['edit', 'update']);
+    Route::resource('orderItem', OrderItemController::class);
     Route::resource('comment', CommentController::class);
     Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
     Route::prefix('config')->name('config.')->group(function () {

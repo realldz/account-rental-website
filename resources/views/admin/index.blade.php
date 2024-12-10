@@ -56,6 +56,10 @@
             <x-adminlte-small-box title="{{ $accountRenting }}" text="Tài khoản đang được thuê" icon="fas fa-shopping-cart" theme="success"
                 url="{{ route('admin.account.index') }}" url-text="View details" />
         </div>
+        <div class="col-lg-3 col-6">
+            <x-adminlte-small-box title="{{ $accountRentingExpired }}" text="Tài khoản thuê hết hạn" icon="fas fa-shopping-cart" theme="success"
+                url="{{ route('admin.orderItem.index', ['expired' => 1]) }}" url-text="View details" />
+        </div>
 
     </div>
 

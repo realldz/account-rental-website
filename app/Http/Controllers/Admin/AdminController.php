@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ class AdminController extends Controller
         $revenueMonth = Order::where('created_at', '>=', date('Y-m-1 00:00:00'))->where('status', 1)->sum('total_price');
         $revenueTotal = Order::where('status', 1)->sum('total_price');
         $accountRenting = Account::where('status', 1)->count();
+        $accountRentingExpired = OrderItem::whereNotNull('account')->where('end_date', '<=', date('Y-m-d'))->count();
         return view('admin.index', compact(
             'totalUser',
             'totalProduct', 
@@ -36,7 +38,8 @@ class AdminController extends Controller
             'revenueToday',
             'revenueMonth',
             'revenueTotal',
-            'accountRenting'
+            'accountRenting',
+            'accountRentingExpired'
         ));
     }
 }

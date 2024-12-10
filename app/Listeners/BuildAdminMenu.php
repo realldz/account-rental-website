@@ -48,6 +48,11 @@ class BuildAdminMenu
                 'icon' => 'fas fa-fw fa-comment',
             ],
             [
+                'text' => 'Tài khoản đang thuê',
+                'route'  => 'admin.orderItem.index',
+                'icon' => 'fas fa-fw fa-cookie-bite',
+            ],
+            [
                 'header' => 'Sản phẩm'
             ],
             [

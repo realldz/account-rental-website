@@ -7,11 +7,25 @@ use App\Http\Requests\Admin\OrderItemRequest;
 use App\Models\OrderItem;
 use App\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OrderItemController extends Controller
 {
     use CrudTrait;
+    public function index(Request $request) {
+        $query = OrderItem::orderByDesc('id')->whereNotNull('account');
+        foreach (['id', 'account'] as $field) {
+            $request->whenFilled($field, function ($value) use ($query, $field) {
+                $query->where($field, $value);
+            });
+        }
+        if ($request->filled('expired')) {
+            $query->where('end_date', '<=', now());
+        }
+        $items = $query->paginate(15);
+        return view('admin.pages.account.rent', compact('items'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
