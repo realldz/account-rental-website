@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\OrderItemRequest;
 use App\Models\OrderItem;
 use App\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,14 +15,16 @@ class OrderItemController extends Controller
 {
     use CrudTrait;
     public function index(Request $request) {
-        $query = OrderItem::orderByDesc('id')->whereNotNull('account');
+        $query = OrderItem::whereNotNull('account');
         foreach (['id', 'account'] as $field) {
             $request->whenFilled($field, function ($value) use ($query, $field) {
                 $query->where($field, $value);
             });
         }
         if ($request->filled('expired')) {
-            $query->where('end_date', '<=', now());
+            $query->where('end_date', '<', date('Y-m-d'))->orderByDesc('end_date');
+        } else {
+            $query->orderByDesc('id');
         }
         $items = $query->paginate(15);
         return view('admin.pages.account.rent', compact('items'));
@@ -49,5 +52,15 @@ class OrderItemController extends Controller
     public function update(OrderItemRequest $request, OrderItem $orderItem)
     {
         return $this->updateT($request, $orderItem);
+    }
+
+    public function setExpired(OrderItem $orderItem) : JsonResponse {
+        if ($orderItem->end_date < date('Y-m-d')) {
+            $orderItem->update([
+                'status' => 0
+            ]);
+            return $this->success('Thao tác thành công');
+        }
+        return $this->fail('Thao tác thất bại');
     }
 }

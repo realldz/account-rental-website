@@ -107,7 +107,7 @@
                                     </select>
                                 </td>
                                 <td style="text-align:left">{{ $item->product->name }}</td>
-                                <td style="text-align:left">{{ $item->account }} <br></td>
+                                <td style="text-align:left">{{ $item->status == 0 ? 'Đã hết hạn' : $item->account }} <br></td>
                                 <td style="text-align:left">{{ $item->formated_price }} <br></td>
                                 <td style="text-align:left">{{ $item->start_date }} <br></td>
                                 <td style="text-align:left">{{ $item->end_date }} <br></td>

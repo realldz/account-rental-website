@@ -34,6 +34,7 @@
                     <th>Thời gian bắt đầu</th>
                     <th>Thời gian kết thúc</th>
                     <th>Giá tiền</th>
+                    <th>Trạng thái</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -48,13 +49,21 @@
                         <td>{{ $item->start_date }}</td>
                         <td>{{ $item->end_date }}</td>
                         <td>{{ $item->price }}đ</td>
+                        <td>{{ $item->status == 0 ? 'Đã thu hồi tài khoản' : 'Đang sử dụng' }}</td>
                         <td>
-                            <a href="{{ route('admin.orderItem.edit', $item->id) }}" class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="{{ route('admin.account.index', ['info' => explode('|', $item->account,-1)[0]]) }}" class="btn btn-primary">
-                                <i class="fas fa-search"></i>
-                            </a>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu">
+                                    @if ($item->end_date < date('Y-m-d') && $item->status == 1)
+                                        <a class="dropdown-item" href="javascript:setExpired('{{ route('admin.orderItem.expired', $item->id) }}')">Đã thu hồi tài khoản</a>
+                                    @endif
+                                    <a class="dropdown-item" href="{{ route('admin.orderItem.edit', $item->id) }}">Chỉnh sửa</a>
+                                    <a class="dropdown-item" href="{{ route('admin.account.index', ['info' => explode('|', $item->account,-1)[0]]) }}" target="_blank">Tìm tài khoản</a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -63,3 +72,36 @@
         @include('admin.components.x-slot.footerSlot', ['model' => $items])
     </x-adminlte-card>
 @endsection
+@push('js')
+    <script>
+        function setExpired(url) {
+        swal.fire({
+            title: 'Warning',
+            text: 'Xác nhận đã thu hồi tài khoản ?',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Đóng',
+            confirmButtonText: 'Xác nhận',
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {_token: '{{ csrf_token() }}'},
+                    dataType: 'json',
+                    success: function(ret) {
+                        if (ret.status === 'success') {
+                            swal.fire({title: ret.message, icon: 'success', timer: 1000, showConfirmButton: false}).then(() => window.location.reload());
+                        } else {
+                            swal.fire({title: ret.message, icon: 'error'}).then(() => window.location.reload());
+                        }
+                    },
+                    error: function(ret) {
+                        swal.fire({title: ret.responseJSON.message, icon: 'error'}).then(() => window.location.reload());
+                    }
+                });
+            }
+        });
+    }
+    </script>
+@endpush

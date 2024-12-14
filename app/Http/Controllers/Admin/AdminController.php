@@ -25,7 +25,7 @@ class AdminController extends Controller
         $revenueMonth = Order::where('created_at', '>=', date('Y-m-1 00:00:00'))->where('status', 1)->sum('total_price');
         $revenueTotal = Order::where('status', 1)->sum('total_price');
         $accountRenting = Account::where('status', 1)->count();
-        $accountRentingExpired = OrderItem::whereNotNull('account')->where('end_date', '<=', date('Y-m-d'))->count();
+        $accountRentingExpired = OrderItem::whereNotNull('account')->where('status', 1)->where('end_date', '<', date('Y-m-d'))->count();
         return view('admin.index', compact(
             'totalUser',
             'totalProduct', 

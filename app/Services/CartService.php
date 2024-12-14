@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Traits\JsonResponseTrait;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,10 @@ class CartService
 
         if ($renew_for) {
             $product_in_cart = $cart->where('product_id', $product_id)->where('renew_for', $renew_for)->first();
+            $account = OrderItem::find($renew_for)->account;
+            if (!$account) {
+                return false;
+            }
             if ($product_in_cart) {
                 return true;
             }
